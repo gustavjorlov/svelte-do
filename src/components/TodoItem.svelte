@@ -15,6 +15,9 @@
 </script>
 
 <style>
+  p {
+    padding: 10px 20px;
+  }
   .done {
     text-decoration: line-through;
   }

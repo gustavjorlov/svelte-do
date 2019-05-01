@@ -11,6 +11,17 @@
   $: visibleTodos = getVisibleTodos(filter, todoItems);
 </script>
 
+<style>
+  ul {
+    width: 300px;
+    list-style: none;
+  }
+  li:hover {
+    background: #efefef;
+    cursor: pointer;
+  }
+</style>
+
 <ul>
   {#each visibleTodos as item (item.id)}
     <li>

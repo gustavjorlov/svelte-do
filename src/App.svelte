@@ -1,5 +1,6 @@
 <script>
 	import TodoList from "./components/TodoList.svelte";
+	import AddTodo from "./components/AddTodo.svelte";
 	import VisibilityFilter from "./components/VisibilityFilter.svelte";
 	import { toggleTodoForId } from "./helpers/todolist_helper.js";
 	let todoCount,
@@ -8,8 +9,11 @@
 
 	$: todoCount = todos.length;
 
-	const handleAdd = () => {
-	  todos = [...todos, { id: todos.length + 1, text: Date.now(), done: false }];
+	const handleAdd = e => {
+	  todos = [
+	    ...todos,
+	    { id: todos.length + 1, text: e.detail.text, done: false }
+	  ];
 	};
 
 	const handleToggle = (e, data) => {
@@ -27,6 +31,6 @@
 </style>
 
 <h1>Todo (total {todoCount})</h1>
-<button on:click={handleAdd}>+ Add</button>
+<AddTodo on:addtodo={handleAdd} />
 <TodoList todoItems={todos} filter={visibilityFilter} on:todotoggle={handleToggle} />
 <VisibilityFilter on:visibilityChange={changeVisibility} />
