@@ -1,0 +1,32 @@
+query{
+  repository(name:"LogLady", owner:"kits-ab"){
+    projects(first:1){
+      nodes{
+        number
+      }
+    }
+    project(number:1){
+      creator{
+        login
+      }
+      columns(first:10){
+        nodes{
+          name
+          cards{
+            nodes{
+							creator{login}
+              state
+              note
+              updatedAt
+							content{
+                ... on Issue{
+                  title
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
