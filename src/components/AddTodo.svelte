@@ -2,14 +2,11 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   let errorMessage = "";
+  let inputValue = "";
 
   const handleAdd = () => {
-    const todoText = document.querySelector("#morestuff").value;
-    if (todoText !== "") {
-      errorMessage = "";
-      dispatch("addtodo", { text: todoText });
-      document.querySelector("#morestuff").value = "";
-    } else errorMessage = "Plx add something to do";
+    dispatch("addtodo", { text: inputValue });
+    inputValue = "";
   };
 </script>
 
@@ -19,6 +16,5 @@
   }
 </style>
 
-<button on:click={handleAdd}>+ Add</button>
-<input id="morestuff" type="text" placeholder="More stuff" />
-<p class="error">{errorMessage}</p>
+<input bind:value={inputValue} type="text" />
+<button on:click={handleAdd} disabled={inputValue === ""}>Add</button>

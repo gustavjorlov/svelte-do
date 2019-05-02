@@ -15,6 +15,7 @@
   ul {
     width: 300px;
     list-style: none;
+    padding: 0px;
   }
   li:hover {
     background: #efefef;
