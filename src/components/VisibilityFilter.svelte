@@ -29,6 +29,6 @@
 
 <p>
   <span class={activeFilter === 'all' ? 'active' : ""} on:click={changeTo('all')}>All</span>
-  <span  class={activeFilter === 'todo' ? 'active' : ""} on:click={changeTo('todo')}>Todo</span>
+  <span class={activeFilter === 'todo' ? 'active' : ""} on:click={changeTo('todo')}>Todo</span>
   <span class={activeFilter === 'done' ? 'active' : ""}  on:click={changeTo('done')}>Done</span>
 </p>
