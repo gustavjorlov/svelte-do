@@ -1,5 +1,6 @@
 <script>
   import TodoItem from "./TodoItem.svelte";
+  import { onDestroy } from "svelte";
   import { getVisibleTodos } from "../helpers/todolist_helper.js";
   import { todos } from "../store.js";
 
@@ -8,8 +9,13 @@
     console.log("derp", e.detail);
   };
   let visibleTodos;
-  $: todos.subscribe(updatedTodos => {
+  let unsubscribe;
+  $: unsubscribe = todos.subscribe(updatedTodos => {
     visibleTodos = getVisibleTodos(filter, updatedTodos);
+  });
+  onDestroy(() => {
+    console.log("Unsubscribing todos store");
+    unsubscribe();
   });
 </script>
 

@@ -12,7 +12,6 @@ export const toggleTodoForId = (todos, id) => {
 };
 
 export const getVisibleTodos = (filter, todos) => {
-  console.log("getVisibleTodos");
   switch (filter) {
     case "todo":
       return todos.filter(item => !item.done);

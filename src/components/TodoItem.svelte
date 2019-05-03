@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onMount } from "svelte";
+  import { createEventDispatcher, onMount, onDestroy } from "svelte";
   const dispatch = createEventDispatcher();
 
   export let label = "-";
@@ -16,12 +16,11 @@
     dispatch("todoremove", { id });
   };
 
-  const onDestroy = () => {
+  onDestroy(() => {
     console.log("I got destroyed", label);
-  };
+  });
   onMount(() => {
     console.log("I mounted", label);
-    return onDestroy;
   });
 </script>
 

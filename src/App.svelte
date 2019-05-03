@@ -8,7 +8,12 @@
 	} from "./helpers/todolist_helper.js";
 	import { todos } from "./store.js";
 
-	let visibilityFilter = "all";
+	let visibilityFilter = "all",
+	  todoItems = [];
+
+	todos.subscribe(_todos => {
+	  todoItems = _todos;
+	});
 
 	const handleAdd = e => {
 	  todos.update(_todos => [
@@ -42,8 +47,12 @@
 
 <h1>Todo</h1>
 <AddTodo on:addtodo={handleAdd} on:removeall={handleRemoveAll} />
+{#if todoItems.length > 0}
 <TodoList 
 	filter={visibilityFilter} 
 	on:todotoggle={handleToggle} 
 	on:todoremove={handleRemove} />
 <VisibilityFilter on:visibilityChange={changeVisibility} />
+{:else}
+	<h3>TODO: Add some todos</h3>
+{/if}
