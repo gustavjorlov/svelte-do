@@ -8,13 +8,7 @@
 	} from "./helpers/todolist_helper.js";
 	import { todos } from "./store.js";
 
-	let todoCount,
-	  visibilityFilter = "all";
-
-	todos.subscribe(_todos => {
-		console.log(_todos);
-		todoCount = _todos.length;
-	})
+	let visibilityFilter = "all";
 
 	const handleAdd = e => {
 	  todos.update(_todos => [
@@ -31,6 +25,10 @@
 	  todos.update(_todos => removeTodoWithId(_todos, e.detail.id));
 	};
 
+	const handleRemoveAll = () => {
+	  todos.set([]);
+	};
+
 	const changeVisibility = e => {
 	  visibilityFilter = e.detail;
 	};
@@ -42,8 +40,8 @@
 	}
 </style>
 
-<h1>Todo (total {todoCount})</h1>
-<AddTodo on:addtodo={handleAdd} />
+<h1>Todo</h1>
+<AddTodo on:addtodo={handleAdd} on:removeall={handleRemoveAll} />
 <TodoList 
 	filter={visibilityFilter} 
 	on:todotoggle={handleToggle} 

@@ -8,6 +8,9 @@
     dispatch("addtodo", { text: inputValue });
     inputValue = "";
   };
+  const handleRemoveAll = () => {
+    dispatch("removeall");
+  };
 </script>
 
 <style>
@@ -18,3 +21,4 @@
 
 <input bind:value={inputValue} type="text" />
 <button on:click={handleAdd} disabled={inputValue === ""}>Add</button>
+<button on:click={handleRemoveAll}>Remove All</button>
