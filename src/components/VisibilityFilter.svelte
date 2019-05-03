@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onDestroy } from "svelte";
   import { todos } from "../store.js";
   export let activeFilter = "all";
   const dispatch = createEventDispatcher();
@@ -9,12 +9,16 @@
     activeFilter = filter;
   };
   let counts = { all: 0, todo: 0, done: 0 };
-  todos.subscribe(_todos => {
+  const unsubscribe = todos.subscribe(_todos => {
     counts = { all: 0, todo: 0, done: 0 };
     _todos.reduce((acc, item) => {
       counts[item.done ? "done" : "todo"] += 1;
     }, []);
     counts.all = _todos.length;
+  });
+  onDestroy(() => {
+    console.log("Unsubrcibing VisibilityFilter from todo updates");
+    unsubscribe();
   });
 </script>
 
