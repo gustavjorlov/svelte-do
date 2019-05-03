@@ -22,3 +22,7 @@ export const getVisibleTodos = (filter, todos) => {
       return todos;
   }
 };
+
+export const removeTodoWithId = (todos, id) => {
+  return todos.filter(todo => todo.id !== id);
+};

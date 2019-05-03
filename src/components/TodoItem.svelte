@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   const dispatch = createEventDispatcher();
 
   export let label = "-";
@@ -12,21 +12,51 @@
       done: !done
     });
   };
+  const removeTodo = () => {
+    dispatch("todoremove", { id });
+  };
+
+  const onDestroy = () => {
+    console.log("I got destroyed", label);
+  };
+  onMount(() => {
+    console.log("I mounted", label);
+    return onDestroy;
+  });
 </script>
 
 <style>
+  div {
+    display: flex;
+  }
   p {
     padding: 10px;
+    border-radius: 20px;
+  }
+  .item:hover {
+    background: #efefef;
+    cursor: pointer;
   }
   .done {
     text-decoration: line-through;
   }
+  .remove {
+    display: inline;
+    transition: 0.4s;
+    border-radius: 20px;
+    height: 8px;
+    position: relative;
+    top: 5px;
+    line-height: 7px;
+    font-weight: bold;
+  }
+  .remove:hover {
+    cursor: pointer;
+    background: rgb(245, 157, 157);
+  }
 </style>
 
-<div on:click={toggleTodo}>
-  {#if done}
-    <p class="done">{label}</p>
-  {:else}
-    <p class="todo">{label}</p>
-  {/if}
+<div>
+  <p on:click={toggleTodo} class={done ? "done item": "todo item"}>{label}</p>
+  <p on:click={removeTodo} class="remove">-</p>
 </div>

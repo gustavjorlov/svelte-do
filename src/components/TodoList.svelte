@@ -17,10 +17,6 @@
     list-style: none;
     padding: 0px;
   }
-  li:hover {
-    background: #efefef;
-    cursor: pointer;
-  }
 </style>
 
 <ul>
@@ -30,7 +26,8 @@
         id={item.id} 
         label={item.text} 
         done={item.done} 
-        on:todotoggle 
+        on:todotoggle
+        on:todoremove
       />
     </li>
   {/each}
