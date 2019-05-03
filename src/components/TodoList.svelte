@@ -1,14 +1,16 @@
 <script>
   import TodoItem from "./TodoItem.svelte";
   import { getVisibleTodos } from "../helpers/todolist_helper.js";
+  import { todos } from "../store.js";
 
-  export let todoItems = [];
   export let filter = "all";
   const handleToggle = (e, data) => {
     console.log("derp", e.detail);
   };
   let visibleTodos;
-  $: visibleTodos = getVisibleTodos(filter, todoItems);
+  $: todos.subscribe(updatedTodos => {
+    visibleTodos = getVisibleTodos(filter, updatedTodos);
+  });
 </script>
 
 <style>
