@@ -1,6 +1,7 @@
 <script>
 	import TodoList from "./components/TodoList.svelte";
 	import AddTodo from "./components/AddTodo.svelte";
+	import ProgressBar from "./components/ProgressBar.svelte";
 	import VisibilityFilter from "./components/VisibilityFilter.svelte";
 	import {
 	  toggleTodoForId,
@@ -48,6 +49,7 @@
 <h1>Todo</h1>
 <AddTodo on:addtodo={handleAdd} on:removeall={handleRemoveAll} />
 {#if todoItems.length > 0}
+<ProgressBar />
 <TodoList 
 	filter={visibilityFilter} 
 	on:todotoggle={handleToggle} 
