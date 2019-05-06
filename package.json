@@ -18,7 +18,8 @@
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
-    "start:dev": "sirv public --dev"
+    "start:dev": "sirv public --dev",
+    "publish": "cp public/bundle.* docs/ && cp public/global.* docs/"
   },
   "dependencies": {
     "ramda": "^0.26.1"
